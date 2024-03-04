@@ -1,20 +1,12 @@
-#![allow(unused)]
-
-mod game;
-
-use game::models::{Game, Board};
+use checkers;
 
 fn main() {
     let p1 = "Player 1".to_string();
     let p2 = "Player 2".to_string();
 
-    let mut game = Game {
-        is_over: false,
-        winner: None,
-        player_b: p2,
-        player_w: p1,
-        board: Board::new(),
-    };
+    let game = checkers::Game::new(p1, p2);
 
-    print!("{}", game.board);
+    if let Err(error) = checkers::run(game) {
+        eprintln!("Error while running game occured: {}", error);
+    };
 }
